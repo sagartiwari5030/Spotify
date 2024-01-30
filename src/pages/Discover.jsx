@@ -12,14 +12,17 @@ const Discover = () => {
   const { activeSong, isPlaying } = useSelector((state) => state.player);
   const { data, isFetching, error } = useGetSongsByGenreQuery(genreListId || 'POP');
 
-  if (isFetching) return <Loader title="Loading songs..." />;
+  // if (isFetching) return <Loader title="Loading songs..." />;
 
-  if (error) return <Error />;
+  // if (error) return <Error />;
 
   const genreTitle = genres.find(({ value }) => value === genreListId)?.title;
 
   return (
+    <>
+     
     <div className="flex flex-col">
+
       <div className="w-full flex justify-between items-center sm:flex-row flex-col mt-4 mb-10">
         <h2 className="font-bold text-3xl text-white text-left">Discover {genreTitle}</h2>
 
@@ -45,6 +48,7 @@ const Discover = () => {
         ))}
       </div>
     </div>
+    </>
   );
 };
 

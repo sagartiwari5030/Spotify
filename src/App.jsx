@@ -3,6 +3,7 @@ import { Route, Routes } from 'react-router-dom';
 
 import { Searchbar, Sidebar, MusicPlayer, TopPlay } from './components';
 import { ArtistDetails, TopArtists, AroundYou, Discover, Search, SongDetails, TopCharts } from './pages';
+import SignUp from './pages/SignUp';
  
 const App = () => {
   const { activeSong } = useSelector((state) => state.player);
@@ -23,6 +24,8 @@ const App = () => {
               <Route path="/artists/:id" element={<ArtistDetails />} />
               <Route path="/songs/:songid" element={<SongDetails />} />
               <Route path="/search/:searchTerm" element={<Search />} />
+              <Route path="/SignUp" element={<SignUp/>} />
+
             </Routes>
           </div>
           <div className="xl:sticky relative top-0 h-fit">

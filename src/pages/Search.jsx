@@ -12,11 +12,13 @@ const Search = () => {
 
   const songs = data?.tracks?.hits.map((song) => song.track);
 
-  if (isFetching) return <Loader title={`Searching ${searchTerm}...`} />;
+  // if (isFetching) return <Loader title={`Searching ${searchTerm}...`} />;
 
-  if (error) return <Error />;
+  // if (error) return <Error />;
 
   return (
+    <>
+
     <div className="flex flex-col">
       <h2 className="font-bold text-3xl text-white text-left mt-4 mb-10">Showing results for <span className="font-black">{searchTerm}</span></h2>
 
@@ -33,6 +35,7 @@ const Search = () => {
         ))}
       </div>
     </div>
+    </>
   );
 };
 

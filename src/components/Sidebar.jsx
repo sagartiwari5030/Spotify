@@ -10,6 +10,8 @@ const links = [
   { name: 'Around You', to: '/around-you', icon: HiOutlinePhotograph },
   { name: 'Top Artists', to: '/top-artists', icon: HiOutlineUserGroup },
   { name: 'Top Charts', to: '/top-charts', icon: HiOutlineHashtag },
+  { name: 'SignUp ', to: '/SignUp', icon: HiOutlineHashtag },
+
 ];
 
 const NavLinks = ({ handleClick }) => (
