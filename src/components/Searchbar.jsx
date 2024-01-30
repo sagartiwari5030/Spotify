@@ -12,7 +12,7 @@ const Searchbar = () => {
 
     navigate(`/search/${searchTerm}`);
   };
-
+  
   return (
 
     <>

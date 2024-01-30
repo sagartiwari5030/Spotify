@@ -1,16 +1,15 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
-const SignUp = () => {
-  const [name, setName] = useState('');
+
+const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const SingUpAPI = async () => {
+  const LoginAPI = async () => {
     try {
       const url = "https://academics.newtonschool.co";
       const body = {
-        name:name,
         email: email,
         password: password,
         appType: "music"
@@ -21,7 +20,7 @@ const SignUp = () => {
       };
 
       // Make a POST request to your API endpoint
-      const response = await axios.post(`${url}/api/v1/user/signup`, body, { headers });
+      const response = await axios.post(`${url}/api/v1/user/login`, body, { headers });
 
       // Do something with the response
       console.log(response.data);
@@ -34,25 +33,12 @@ const SignUp = () => {
     }
   };
 
+
+
   return (
     <div className="flex h-screen items-center justify-center bg-green-500">
       <div className="bg-white p-8 rounded shadow-md w-96">
-        <h1 className="text-2xl font-bold text-black mb-6">Sign up to start listening</h1>
-          <div className="mb-4">
-            <label htmlFor="name" className="block text-gray-800 text-sm font-semibold mb-2">
-              Name
-            </label>
-            <input
-              type="text"
-              id="name"
-              name="name"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              className="w-full border rounded py-2 px-3 focus:outline-none focus:border-green-400"
-              required
-            />
-          </div>
-
+        <h1 className="text-2xl font-bold text-black mb-6">Log in to start listening</h1>
           <div className="mb-4">
             <label htmlFor="email" className="block text-gray-800 text-sm font-semibold mb-2">
               Email
@@ -83,16 +69,15 @@ const SignUp = () => {
             />
           </div>
 
-          <button onClick={SingUpAPI}
+          <button onClick={LoginAPI}
             type="submit"
             className="bg-green-500 text-white py-2 px-4 rounded hover:bg-green-600 focus:outline-none focus:bg-green-600"
           >
             Submit
           </button>
-        
       </div>
     </div>
   );
 };
 
-export default SignUp;
+export default Login;

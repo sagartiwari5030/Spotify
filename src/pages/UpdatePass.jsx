@@ -1,27 +1,29 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
-const SignUp = () => {
+const Updatepass = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [passwordCurrent, setPassword] = useState('');
+  const [pass, setPass] = useState('');
 
-  const SingUpAPI = async () => {
+  const UpdateAPI = async () => {
     try {
       const url = "https://academics.newtonschool.co";
       const body = {
         name:name,
         email: email,
-        password: password,
+        passwordCurrent: passwordCurrent,
+        password: pass,
         appType: "music"
       };
       const headers = {
-        "Content-Type": "application/json",
+        "Authorization":'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1YjdhYzg4MjBkOTk4MTI2ZmI3NDM2YiIsImlhdCI6MTcwNjUzNjA3MywiZXhwIjoxNzM4MDcyMDczfQ.gFhj4OTj4yDn8kjcXekHLZ5JZpvSMMjZyE3k8APfDUQ ',
         "projectId": "f104bi07c490"
       };
 
       // Make a POST request to your API endpoint
-      const response = await axios.post(`${url}/api/v1/user/signup`, body, { headers });
+      const response = await axios.patch(`${url}/api/v1/user/updateMyPassword`, body, { headers });
 
       // Do something with the response
       console.log(response.data);
@@ -37,7 +39,7 @@ const SignUp = () => {
   return (
     <div className="flex h-screen items-center justify-center bg-green-500">
       <div className="bg-white p-8 rounded shadow-md w-96">
-        <h1 className="text-2xl font-bold text-black mb-6">Sign up to start listening</h1>
+        <h1 className="text-2xl font-bold text-black mb-6">Update Your Password</h1>
           <div className="mb-4">
             <label htmlFor="name" className="block text-gray-800 text-sm font-semibold mb-2">
               Name
@@ -70,20 +72,35 @@ const SignUp = () => {
 
           <div className="mb-4">
             <label htmlFor="password" className="block text-gray-800 text-sm font-semibold mb-2">
-              Password
+             Current Password
             </label>
             <input
               type="password"
               id="password"
               name="password"
-              value={password}
+              value={ passwordCurrent}
               onChange={(e) => setPassword(e.target.value)}
               className="w-full border rounded py-2 px-3 focus:outline-none focus:border-green-400"
               required
             />
           </div>
 
-          <button onClick={SingUpAPI}
+          <div className="mb-4">
+            <label htmlFor="password" className="block text-gray-800 text-sm font-semibold mb-2">
+             New Password
+            </label>
+            <input
+              type="password"
+              id="pass"
+              name="password"
+              value={pass}
+              onChange={(e) => setPass(e.target.value)}
+              className="w-full border rounded py-2 px-3 focus:outline-none focus:border-green-400"
+              required
+            />
+          </div>
+
+          <button onClick={UpdateAPI}
             type="submit"
             className="bg-green-500 text-white py-2 px-4 rounded hover:bg-green-600 focus:outline-none focus:bg-green-600"
           >
@@ -95,4 +112,4 @@ const SignUp = () => {
   );
 };
 
-export default SignUp;
+export default Updatepass;
