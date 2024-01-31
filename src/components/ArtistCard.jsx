@@ -12,6 +12,7 @@ const ArtistCard = ({ track }) => {
     >
       <img alt="song_img" src={track?.image} className="w-full h-56 rounded-lg" />
       <p className="mt-4 font-semibold text-lg text-white truncate">
+       {track?.name}<br></br>
         {track?.description}
       </p>
     </div>

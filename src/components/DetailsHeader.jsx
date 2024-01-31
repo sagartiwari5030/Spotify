@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const DetailsHeader = ({ artistId, artistData, songData }) => (
+const DetailsHeader = ({ _id, artistData, songData }) => (
   <div className="relative w-full flex flex-col">
     <div className="w-full bg-gradient-to-l from-transparent to-black sm:h-48 h-28" />
 
@@ -9,7 +9,7 @@ const DetailsHeader = ({ artistId, artistData, songData }) => (
       <img
         alt="profile"
         src={
-          artistId ? artistData?.attributes?.artwork?.url
+          _id ? artistData?.attributes?.artwork?.url
             .replace('{w}', '500')
             .replace('{h}', '500')
             : songData?.images?.coverart
@@ -19,16 +19,16 @@ const DetailsHeader = ({ artistId, artistData, songData }) => (
 
       <div className="ml-5">
         <p className="font-bold sm:text-3xl text-xl text-white">
-          {artistId ? artistData?.attributes?.name : songData?.title}
+          {_id ? artistData?.attributes?.name : songData?.title}
         </p>
-        {!artistId && (
+        {!_id && (
           <Link to={`/artists/${songData?.artists[0]?.adamid}`}>
             <p className="text-base text-gray-400 mt-2">{songData?.subtitle}</p>
           </Link>
         )}
 
         <p className="text-base text-gray-400 mt-2">
-          {artistId
+          {_id
             ? artistData?.attributes?.genreNames[0]
             : songData?.genres?.primary}
         </p>

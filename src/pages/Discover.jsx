@@ -9,46 +9,18 @@ import { genres } from '../assets/constants';
 
 const Discover = () => {
   const dispatch = useDispatch();
-  // const { genreListId } = useSelector((state) => state.player);
-  // const { activeSong, isPlaying } = useSelector((state) => state.player);
-  // const { data, isFetching, error } = useGetSongsByGenreQuery(genreListId || 'POP');
+  const { genreListId } = useSelector((state) => state.player);
+  const { activeSong, isPlaying } = useSelector((state) => state.player);
+  const { data, isFetching, error } = useGetSongsByGenreQuery(genreListId || 'POP');
 
   // if (isFetching) return <Loader title="Loading songs..." />;
 
   // if (error) return <Error />;
 
   const genreTitle = genres.find(({ value }) => value === genreListId)?.title;
-  const [data, setData] = useState([]);
+  // const [data, setData] = useState([]);
 
-  const GetSongAPI = async () => {
-    try {
-      const url = "https://academics.newtonschool.co";
-      const headers = {
-        "Content-Type": "application/json",
-        "projectId": "f104bi07c490"
-      };
-
-      // Make a POST request to your API endpoint
-      const response = await axios.get(`${url}/api/v1/music/song`, { headers });
-
-      // Do something with the response
-      console.log("Data received =>",response.data.data[0]);
-      setData(response.data.data);
-
-
-      // Set loading to false, indicating that the data has been fetched
-      // setLoading(false);
-    } catch (error) {
-      console.error('Error fetching data:', error);
-      // setLoading(false);
-    }
-  };
   
-  useEffect(() => {
-    // Update the document title using the browser API
-   GetSongAPI()
-  },[]);
-
 
   return (
     <>
@@ -58,13 +30,13 @@ const Discover = () => {
       <div className="w-full flex justify-between items-center sm:flex-row flex-col mt-4 mb-10">
         <h2 className="font-bold text-3xl text-white text-left">Discover {genreTitle}</h2>
 
-        {/* <select
+        <select
           onChange={(e) => dispatch(selectGenreListId(e.target.value))}
           value={genreListId || 'pop'}
           className="bg-black text-gray-300 p-3 text-sm rounded-lg outline-none sm:mt-0 mt-5"
         >
           {genres.map((genre) => <option key={genre.value} value={genre.value}>{genre.title}</option>)}
-        </select> */}
+        </select> 
       </div>
 
       <div className="flex flex-wrap sm:justify-start justify-center gap-8">

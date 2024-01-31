@@ -1,9 +1,10 @@
 /* eslint-disable import/no-unresolved */
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef,useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { FreeMode } from 'swiper';
+import axios from 'axios';
 
 import PlayPause from './PlayPause';
 import { playPause, setActiveSong } from '../redux/features/playerSlice';
@@ -61,6 +62,40 @@ const TopPlay = () => {
     dispatch(playPause(true));
   };
 
+//api call newton
+const [artist, setArtist] = useState([]);
+
+const GetArtistAPI = async () => {
+  try {
+    const url = "https://academics.newtonschool.co";
+    const headers = {
+      "Content-Type": "application/json",
+      "projectId": "f104bi07c490"
+    };
+
+    // Make a POST request to your API endpoint
+    const response = await axios.get(`${url}/api/v1/music/artist/`, { headers });
+
+    // Do something with the response
+    console.log("Data received =>",response.data.artist[0]);
+    setArtist(response.data.artist);
+
+
+    // Set loading to false, indicating that the data has been fetched
+    // setLoading(false);
+  } catch (error) {
+    console.error('Error fetching artist:', error);
+    // setLoading(false);
+  }
+};
+
+useEffect(() => {
+  // Update the document title using the browser API
+ GetArtistAPI()
+},[]);
+
+
+
   return (
     <div ref={divRef} className="xl:ml-6 ml-0 xl:mb-0 mb-6 flex-1 xl:max-w-[500px] max-w-full flex flex-col">
       <div className="w-full flex flex-col">
@@ -103,14 +138,14 @@ const TopPlay = () => {
           modules={[FreeMode]}
           className="mt-4"
         >
-          {topPlays?.slice(0, 5).map((artist) => (
+          {topPlays?.slice(0, 5).map((track) => (
             <SwiperSlide
-              key={artist?.key}
+            key={track._id} track={track}
               style={{ width: '25%', height: 'auto' }}
               className="shadow-lg rounded-full animate-slideright"
             >
-              <Link to={`/artists/${artist?.artists[0].adamid}`}>
-                <img src={artist?.images?.background} alt="Name" className="rounded-full w-full object-cover" />
+              <Link to={`/top-artists/${track?._id}`}>
+                <img src={track?.image} alt="Name" className="rounded-full w-full object-cover" />
               </Link>
             </SwiperSlide>
           ))}
